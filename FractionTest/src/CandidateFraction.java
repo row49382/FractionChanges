@@ -23,6 +23,7 @@ public class CandidateFraction implements Fraction {
 		this.denominator = denominator;
 		this.numerator = numerator;
 		this.reduce();
+		//comment
 	}
 
 
@@ -52,13 +53,6 @@ public class CandidateFraction implements Fraction {
 		if(tempNum1 + tempNum2 > Integer.MAX_VALUE) {
 			throw new ArithmeticException("Numerator Overflow");
 		}
-		// check for negative overflow
-		if(tempDen < Integer.MIN_VALUE) {
-			throw new ArithmeticException("Negative Denominator Overflow");
-		}
-		if(tempNum1 + tempNum2 < Integer.MIN_VALUE) {
-			throw new ArithmeticException("Negative Numerator Overflow");
-		}
 				
 		CandidateFraction answer = new CandidateFraction((int)(tempNum1+tempNum2), (int) tempDen);
 		return answer;
@@ -73,7 +67,7 @@ public class CandidateFraction implements Fraction {
 		//find GCD
 		int a = Math.abs(numerator);
 		int b = Math.abs(denominator);
-	    while (a != b) { 
+	    while (a != b && a != 0) { 
 	        if (a > b) {
 	           a = a - b; 
 	        }else {
@@ -84,12 +78,6 @@ public class CandidateFraction implements Fraction {
 	    //a is now the GCD
 	    numerator /= a;
 	    denominator /= a;
-	    
-	    // make negatives are reduced properly
-	    if(denominator < 0) {
-	    	denominator = denominator * -1;
-	    	numerator = numerator * -1;
-	    }
 	    
 	}
 
