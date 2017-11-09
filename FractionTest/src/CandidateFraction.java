@@ -52,6 +52,13 @@ public class CandidateFraction implements Fraction {
 		if(tempNum1 + tempNum2 > Integer.MAX_VALUE) {
 			throw new ArithmeticException("Numerator Overflow");
 		}
+		// check for negative overflow
+		if(tempDen < Integer.MIN_VALUE) {
+			throw new ArithmeticException("Negative Denominator Overflow");
+		}
+		if(tempNum1 + tempNum2 < Integer.MIN_VALUE) {
+			throw new ArithmeticException("Negative Numerator Overflow");
+		}
 				
 		CandidateFraction answer = new CandidateFraction((int)(tempNum1+tempNum2), (int) tempDen);
 		return answer;
@@ -77,6 +84,12 @@ public class CandidateFraction implements Fraction {
 	    //a is now the GCD
 	    numerator /= a;
 	    denominator /= a;
+	    
+	    // make negatives are reduced properly
+	    if(denominator < 0) {
+	    	denominator = denominator * -1;
+	    	numerator = numerator * -1;
+	    }
 	    
 	}
 
